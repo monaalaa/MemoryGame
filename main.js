@@ -12,14 +12,24 @@ for (let i = 0; i < cards.length; i++) {
   div.addEventListener("click", clickCard);
 }
 let isItFirstCard = false;
-let prevValue = "";
+let prevCard;
 function clickCard(event) {
   if (!isItFirstCard) {
-    prevValue = event.target.getAttribute("name");
+    prevCard = event.target;
+    prevCard.textContent = prevCard.getAttribute("name");
   } else {
-    if (prevValue === event.target.getAttribute("name")) {
+    let currentCard = event.target;
+    if (prevCard.getAttribute("name") === currentCard.getAttribute("name")) {
+      currentCard.textContent = currentCard.getAttribute("name");
       console.log("Match");
     } else {
+      currentCard.textContent = currentCard.getAttribute("name");
+
+      setTimeout(function () {
+        currentCard.textContent = "Hidden Card";
+        prevCard.textContent = "Hidden Card";
+      }, 1000);
+
       console.log("wrong");
     }
   }
