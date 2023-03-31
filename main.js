@@ -4,13 +4,14 @@ function handleButtonClick() {
   title.style.backgroundColor = userNameInput;
 }
 let cards = [1, 3, 2, 1, 2, 3];
-
+let defaultURL = "https://robohash.org/1?set=set5";
 cards.forEach((i) => {
-  let div = document.createElement("div");
-  div.textContent = "Hidden Card";
-  div.setAttribute("name", `Card ${cards[i]}`);
-  document.body.appendChild(div);
-  div.addEventListener("click", clickCard);
+  let img = document.createElement("img");
+  //img.textContent = "Hidden Card";
+  img.src = defaultURL;
+  img.setAttribute("name", `${cards[i]}`);
+  document.body.appendChild(img);
+  img.addEventListener("click", clickCard);
 });
 
 let isItFirstCard = false;
@@ -18,7 +19,8 @@ let prevCard;
 function clickCard(event) {
   if (!isItFirstCard) {
     prevCard = event.target;
-    prevCard.textContent = prevCard.getAttribute("name");
+    prevCard.src =
+      "https://robohash.org/1?set=set" + prevCard.getAttribute("name");
   } else {
     checkSecondCard(event, prevCard);
   }
@@ -29,14 +31,16 @@ function clickCard(event) {
 function checkSecondCard(event, prevCard) {
   let currentCard = event.target;
   if (prevCard.getAttribute("name") === currentCard.getAttribute("name")) {
-    currentCard.textContent = currentCard.getAttribute("name");
+    currentCard.src =
+      "https://robohash.org/1?set=set" + currentCard.getAttribute("name");
     console.log("Match");
   } else {
-    currentCard.textContent = currentCard.getAttribute("name");
+    currentCard.src =
+      "https://robohash.org/1?set=set" + currentCard.getAttribute("name");
 
     setTimeout(function () {
-      currentCard.textContent = "Hidden Card";
-      prevCard.textContent = "Hidden Card";
+      currentCard.src = defaultURL;
+      prevCard.src = defaultURL;
     }, 1000);
 
     console.log("wrong");
