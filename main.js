@@ -5,7 +5,7 @@ function handleButtonClick() {
 }
 let cards = [1, 3, 2, 1, 2, 3];
 
-cards.forEach((i)=> {
+cards.forEach((i) => {
   let div = document.createElement("div");
   div.textContent = "Hidden Card";
   div.setAttribute("name", `Card ${cards[i]}`);
@@ -20,21 +20,25 @@ function clickCard(event) {
     prevCard = event.target;
     prevCard.textContent = prevCard.getAttribute("name");
   } else {
-    let currentCard = event.target;
-    if (prevCard.getAttribute("name") === currentCard.getAttribute("name")) {
-      currentCard.textContent = currentCard.getAttribute("name");
-      console.log("Match");
-    } else {
-      currentCard.textContent = currentCard.getAttribute("name");
-
-      setTimeout(function () {
-        currentCard.textContent = "Hidden Card";
-        prevCard.textContent = "Hidden Card";
-      }, 1000);
-
-      console.log("wrong");
-    }
+    checkSecondCard(event, prevCard);
   }
   isItFirstCard = !isItFirstCard;
   console.log(event.target.getAttribute("name"));
+}
+
+function checkSecondCard(event, prevCard) {
+  let currentCard = event.target;
+  if (prevCard.getAttribute("name") === currentCard.getAttribute("name")) {
+    currentCard.textContent = currentCard.getAttribute("name");
+    console.log("Match");
+  } else {
+    currentCard.textContent = currentCard.getAttribute("name");
+
+    setTimeout(function () {
+      currentCard.textContent = "Hidden Card";
+      prevCard.textContent = "Hidden Card";
+    }, 1000);
+
+    console.log("wrong");
+  }
 }
