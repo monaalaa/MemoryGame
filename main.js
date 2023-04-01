@@ -7,10 +7,10 @@ let cards = [1, 3, 2, 1, 2, 3];
 let defaultURL = "https://robohash.org/1?set=set5";
 cards.forEach((i) => {
   let img = document.createElement("img");
-  //img.textContent = "Hidden Card";
+  let gallery = document.getElementsByClassName("gallery");
   img.src = defaultURL;
   img.setAttribute("name", `${cards[i]}`);
-  document.body.appendChild(img);
+  gallery[0].appendChild(img);
   img.addEventListener("click", clickCard);
 });
 
