@@ -3,16 +3,51 @@ function handleButtonClick() {
   let userNameInput = document.getElementById("userName").value;
   title.style.backgroundColor = userNameInput;
 }
-let cards = [1, 3, 2, 1, 2, 3];
 let defaultURL = "https://robohash.org/1?set=set5";
-cards.forEach((i) => {
-  let img = document.createElement("img");
-  let gallery = document.getElementsByClassName("gallery");
-  img.src = defaultURL;
-  img.setAttribute("name", `${cards[i]}`);
-  gallery[0].appendChild(img);
-  img.addEventListener("click", clickCard);
-});
+let cards = [1, 3, 2, 1, 2, 3];
+
+function shuffleCards(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  console.log(array);
+  return array;
+}
+
+/*function createCards() {
+  shuffleCards(cards);
+  console.log(cards + "new card");
+
+  cards.forEach((i) => {
+    let img = document.createElement("img");
+    let gallery = document.getElementsByClassName("gallery");
+    img.src = defaultURL;
+    console.log(i + " card number" + cards[i]);
+    img.setAttribute("name", `${cards[i]}`);
+
+    gallery[0].appendChild(img);
+
+    img.addEventListener("click", clickCard);
+  });
+}*/
+
+function createCards() {
+  shuffleCards(cards);
+  console.log(cards + "new card");
+
+  for (let i = 0; i < cards.length; i++) {
+    let img = document.createElement("img");
+    let gallery = document.getElementsByClassName("gallery");
+    img.src = defaultURL;
+    console.log(i + " card number" + cards[i]);
+    img.setAttribute("name", `${cards[i]}`);
+
+    gallery[0].appendChild(img);
+
+    img.addEventListener("click", clickCard);
+  }
+}
 
 let isItFirstCard = false;
 let prevCard;
