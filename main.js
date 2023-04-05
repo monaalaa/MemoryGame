@@ -1,56 +1,38 @@
+let defaultURL = "https://robohash.org/1?set=set5";
+let cards = [1, 3, 2, 1, 2, 3];
+let isItFirstCard = false;
+let prevCard;
+let matchCardsCount = 0;
 function handleButtonClick() {
   let title = document.getElementById("title");
   let userNameInput = document.getElementById("userName").value;
   title.style.backgroundColor = userNameInput;
 }
-let defaultURL = "https://robohash.org/1?set=set5";
-let cards = [1, 3, 2, 1, 2, 3];
 
 function shuffleCards(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-  console.log(array);
   return array;
 }
 
-/*function createCards() {
+function createCards() {
   shuffleCards(cards);
-  console.log(cards + "new card");
+  document.querySelector("#Play-button").style.display = "none";
 
-  cards.forEach((card, index) => {
+  cards.forEach((card) => {
     let img = document.createElement("img");
     let gallery = document.getElementsByClassName("gallery");
     img.src = defaultURL;
-    console.log(index + " card number" + card);
     img.setAttribute("name", `${card}`);
 
     gallery[0].appendChild(img);
 
     img.addEventListener("click", clickCard);
   });
-}*/
-
-function createCards() {
-  shuffleCards(cards);
-  console.log(cards + "new card");
-
-  for (let i = 0; i < cards.length; i++) {
-    let img = document.createElement("img");
-    let gallery = document.getElementsByClassName("gallery");
-    img.src = defaultURL;
-    console.log(i + " card number" + cards[i]);
-    img.setAttribute("name", `${cards[i]}`);
-
-    gallery[0].appendChild(img);
-
-    img.addEventListener("click", clickCard);
-  }
 }
 
-let isItFirstCard = false;
-let prevCard;
 function clickCard(event) {
   if (!isItFirstCard) {
     prevCard = event.target;
@@ -69,6 +51,10 @@ function checkSecondCard(event, prevCard) {
     currentCard.src =
       "https://robohash.org/1?set=set" + currentCard.getAttribute("name");
     console.log("Match");
+    ++matchCardsCount;
+    if (matchCardsCount >= 3) {
+      showWinMessage();
+    }
   } else {
     currentCard.src =
       "https://robohash.org/1?set=set" + currentCard.getAttribute("name");
@@ -77,7 +63,24 @@ function checkSecondCard(event, prevCard) {
       currentCard.src = defaultURL;
       prevCard.src = defaultURL;
     }, 1000);
+  }
+}
 
-    console.log("wrong");
+function showWinMessage() {
+  document.querySelector(".overlay").style.display = "block";
+}
+
+function PlayAgain() {
+  matchCardsCount = 0;
+  document.querySelector(".overlay").style.display = "none";
+  removePrevCards();
+  createCards();
+}
+
+function removePrevCards() {
+  let container = document.getElementById("image-Container");
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+    console.log("Remove child");
   }
 }

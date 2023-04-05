@@ -8,9 +8,19 @@
     <title>Document</title>
   </head>
   <body>
-    <button onclick="createCards()">Play</button>
+    <div class="centered" id="Play-button">
+      <button onclick="createCards()">Play</button>
+    </div>
 
-    <div class="gallery"></div>
+    <div class="gallery" id="image-Container"></div>
+
+    <div class="overlay">
+      <div class="centered">
+        <h2>Wohooo you win</h2>
+        <button onclick="PlayAgain()">Play again</button>
+      </div>
+    </div>
+
     <script src="main.js" defer></script>
   </body>
 </html>
