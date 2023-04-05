@@ -19,12 +19,12 @@ function shuffleCards(array) {
   shuffleCards(cards);
   console.log(cards + "new card");
 
-  cards.forEach((i) => {
+  cards.forEach((card, index) => {
     let img = document.createElement("img");
     let gallery = document.getElementsByClassName("gallery");
     img.src = defaultURL;
-    console.log(i + " card number" + cards[i]);
-    img.setAttribute("name", `${cards[i]}`);
+    console.log(index + " card number" + card);
+    img.setAttribute("name", `${card}`);
 
     gallery[0].appendChild(img);
 
